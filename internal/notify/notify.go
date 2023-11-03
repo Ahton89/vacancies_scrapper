@@ -45,7 +45,7 @@ func (n *notifier) Notify(ctx context.Context, vacancies []types.VacancyInfo) (e
 			header := slack.NewHeaderBlock(
 				&slack.TextBlockObject{
 					Type:  slack.PlainTextType,
-					Text:  ":hidog: Новая вакансия детектед",
+					Text:  n.RandomHeader(),
 					Emoji: true,
 				},
 			)
@@ -190,4 +190,9 @@ func (n *notifier) WelcomeMessage(ctx context.Context, vacanciesCount int) error
 
 	// Send message
 	return slack.PostWebhookContext(ctx, n.config.SlackWebhook, &message)
+}
+
+func (n *notifier) RandomHeader() string {
+	rand.New(rand.NewSource(time.Now().UnixNano()))
+	return header[rand.Intn(len(header))]
 }

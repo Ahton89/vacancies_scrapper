@@ -22,6 +22,15 @@ import (
 	"github.com/Ahton89/vacancies_scrapper/internal/worker/types"
 )
 
+var header = []string{
+	":hidog: Новая вакансия детектед",
+	":partyparrot: А у нас тут новая вакансия",
+	":tada: Ой, а что тут у нас? ВАКАНСИЯ!",
+	":eyes: Воу, воу, смотри что тут",
+	":wave: Привет, я тут новую вакансию нашел",
+	":not_bad: Смотри какая вакансия",
+}
+
 type notifier struct {
 	config configuration.Configuration
 }
