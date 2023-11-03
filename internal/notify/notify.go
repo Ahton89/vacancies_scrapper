@@ -92,7 +92,7 @@ func (n *notifier) Notify(ctx context.Context, vacancies []types.VacancyInfo) (e
 			message := slack.WebhookMessage{
 				Attachments: []slack.Attachment{
 					{
-						Color: "#75FB4C",
+						Color: n.RandomColor(),
 						Blocks: slack.Blocks{
 							BlockSet: blocks,
 						},
@@ -190,9 +190,4 @@ func (n *notifier) WelcomeMessage(ctx context.Context, vacanciesCount int) error
 
 	// Send message
 	return slack.PostWebhookContext(ctx, n.config.SlackWebhook, &message)
-}
-
-func (n *notifier) RandomHeader() string {
-	rand.New(rand.NewSource(time.Now().UnixNano()))
-	return header[rand.Intn(len(header))]
 }

@@ -20,9 +20,11 @@ import (
 	"context"
 	"github.com/Ahton89/vacancies_scrapper/internal/configuration"
 	"github.com/Ahton89/vacancies_scrapper/internal/worker/types"
+	"math/rand"
+	"time"
 )
 
-var header = []string{
+var headers = []string{
 	":hidog: Новая вакансия детектед",
 	":partyparrot: А у нас тут новая вакансия",
 	":tada: Ой, а что тут у нас? ВАКАНСИЯ!",
@@ -34,6 +36,27 @@ var header = []string{
 	":kolya-parrot: Коля одобряет эту вакансию",
 	":robot_face: Сам бы забрал, но я бот...",
 	":roman_pleasure: 0 дней без вакансий",
+}
+
+func (n *notifier) RandomHeader() string {
+	rand.New(rand.NewSource(time.Now().UnixNano()))
+	return headers[rand.Intn(len(headers))]
+}
+
+var colors = []string{
+	"#B2F347",
+	"#75FB4C",
+	"#FA9B73",
+	"#73E1FA",
+	"#7388FA",
+	"#AE73FA",
+	"#FA73AB",
+	"#BEFA73",
+}
+
+func (n *notifier) RandomColor() string {
+	rand.New(rand.NewSource(time.Now().UnixNano()))
+	return colors[rand.Intn(len(colors))]
 }
 
 type notifier struct {
