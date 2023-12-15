@@ -30,6 +30,7 @@ type Configuration struct {
 	ScrapeUrl            string         `env:"SCRAPE_URL,required"`
 	SlackWebhook         string         `env:"SLACK_WEBHOOK,required"`
 	SlackMaxRetry        int            `env:"SLACK_MAX_RETRY" envDefault:"15"`
+	TelegramToken        string         `env:"TELEGRAM_TOKEN,required"`
 }
 
 type cacheStateFile string

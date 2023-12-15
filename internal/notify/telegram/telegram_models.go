@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-package notify
+package telegram
 
 import (
+	"context"
 	"github.com/Ahton89/vacancies_scrapper/internal/configuration"
-	"github.com/Ahton89/vacancies_scrapper/internal/notify/slack"
-	"github.com/Ahton89/vacancies_scrapper/internal/notify/telegram"
+	"github.com/Ahton89/vacancies_scrapper/internal/worker/types"
 )
 
-type notifier struct {
-	config configuration.Configuration
+type telegram struct {
+	config *configuration.Configuration
 }
 
-type Notifier interface {
-	Slack() slack.Slack
-	Telegram() telegram.Telegram
-}
-
-func (n *notifier) Slack() slack.Slack {
-	return slack.New(&n.config)
-}
-
-func (n *notifier) Telegram() telegram.Telegram {
-	return telegram.New(&n.config)
+type Telegram interface {
+	Notify(ctx context.Context, vacancies []types.VacancyInfo) (err error)
+	WelcomeMessage(ctx context.Context, vacanciesCount int) error
 }

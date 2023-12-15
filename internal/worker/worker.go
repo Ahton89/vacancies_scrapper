@@ -108,7 +108,7 @@ func (w *worker) Start(ctx context.Context) {
 
 		if firstRun.(bool) {
 			// Send welcome message
-			err = notifier.WelcomeMessage(ctx, len(vacancies))
+			err = notifier.Telegram().WelcomeMessage(ctx, len(vacancies))
 			if err != nil {
 				log.WithFields(log.Fields{
 					"error": err,
@@ -123,7 +123,7 @@ func (w *worker) Start(ctx context.Context) {
 		} else {
 			// Send new vacancies
 			if len(newVacancies) > 0 {
-				err = notifier.Notify(ctx, newVacancies)
+				err = notifier.Telegram().Notify(ctx, newVacancies)
 				if err != nil {
 					log.WithFields(log.Fields{
 						"error": err,
